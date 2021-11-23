@@ -1,0 +1,24 @@
+.mydiv{
+    border : 2px solid blue;
+    margin: 5px;
+    padding: 10px;
+    background-color:powderblue;
+}
+
+#myheading{
+    color: crimson;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    background-color:skyblue;
+}
+div p{
+    color: red;
+}
+.mycube{
+    height: 70px;
+    width: 70px;
+    background-color: yellowgreen;
+    opacity: 0.4;
+    position: absolute;
+
+}

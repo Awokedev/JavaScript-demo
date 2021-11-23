@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Product Details </title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <script>
+        function getInputValue(){
+
+        //This is get the value of select Product.
+
+        var Products = lblProduct.value;
+        alert(Products);
+      // This is  get the value of Product Name.
+       alert(document.getElementById("pdName").value);
+       
+      //This is get the value of Product Description.
+       alert(document.getElementById("lprDescription").value);
+
+  
+       // This  is   get the value of quantity Number.
+       var quantities = lblQuantity.value;
+       alert(quantities);
+
+       // This is get the value of Pass code
+       alert(document.getElementById("pdrCode").value);
+        
+       // This is get the value of Select Country.
+       var countries = document.getElementsByName("chkCountry");
+        
+       var selectedContries = "";
+       var count;
+       for (count = 0; count < countries.length; count++)
+           {
+             if (countries[count].checked)
+               {
+                selectedContries = selectedContries + countries[count].value + " ;";
+               }
+           }
+        selectedContries = selectedContries . substring ( 0, selectedContries.length - 1);
+        alert(selectedContries);
+
+        // This is get the value of yes or no.
+         var allitems = document.getElementsByName('rdStock');
+         for(i = 0; i < allitems.length; i++)
+            {
+             if(allitems[i].checked)               
+             {
+               alert(allitems[i].value);
+                       
+             }
+            }
+            //This is get the value of Date.
+            alert(document.getElementById("avlDate").value )  ;
+
+            //This is get the value of selectd brand Name.
+            var brands = pdpBrand.value;
+            alert(brands);
+
+            // This is get the value of Similar Products.
+            var selectedProducts = "";
+            var k = 0;
+            for(k=0; k< lblList.length;k++)
+               {
+                if(lblList[k].selected)
+                {
+                selectedProducts = selectedProducts + lblList[k].value + ",";
+                }
+              }
+            selectedProducts = selectedProducts . substring ( 0, selectedProducts.length - 1);
+            alert(selectedProducts);
+            }
+    </script>
+    <body>
+        <div class="container">
+            <h2>Product Details:</h2>
+            <form>
+                <div class="form-group">
+                <label for="lblProduct">Select Product:</label>
+                <select class="form-control" id="lblProduct">
+                    <option> Laptop     </option>
+                    <option> Desktop    </option>
+                    <option> Smartphone </option>
+                    <option> Smart TV   </option>
+                    <option> Headphone  </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pdName"> Product Name: </label>
+                <input type="text" class="form-control" id="pdName" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="ldrDescription"> Product Description: </label>
+                <textarea class="form-control" rows="4" id="lprDescription">
+
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="lblQuantity"> Quantity: </label>
+                <select class="form-control" id="lblQuantity">
+                    <option> 1 </option>
+                    <option> 2 </option>
+                    <option> 3 </option>
+                    <option> 4 </option>
+                    <option> 5 </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pdrCode"> Pass Code: </label>
+                <input type="password" class="form-control" id="pdrCode" placeholder="code">
+            </div>
+           
+                <div class="form-group">
+                     
+                     <label> Available in Country: </label>
+                     <input type="checkbox" name="chkCountry" value="India">India 
+                     <input type="checkbox" name="chkCountry" value="USA">USA 
+                     <input type="checkbox" name="chkCountry" value="SRI">SRI 
+                     <input type="checkbox" name="chkCountry" value="UK">UK 
+                    
+                 </div>
+                 <div class="form-group">
+                    <div id="result"></div>
+                    <label for="stock"> Is in Stock: </label>
+                    <input type="radio" name="rdStock" value="yes">yes
+                        <input type="radio" name="rdStock" value="no">no
+                </div>
+                 <div class="form-group">
+                     <label for="avlDate"> Available Date: </label>
+                     <input type="date" id="avlDate">
+                 </div>
+                
+                    <div class="form-group">
+                        <label for="pdpBrand"> Brand:</label>
+                        <select class="form-control" id="pdpBrand">
+                            <option> Apple       </option>
+                            <option> Samsung     </option>
+                            <option> Nokia       </option>
+                            <option> Plantronics </option>
+                            <option> Dell        </option>
+                            <option> Panasonic   </option>
+                            <option> Microsoft   </option>
+                            
+                        </select>
+            </div>
+            <div class="form-group">
+                <label for="lblList">  Similar Products:  </label>   
+                <select multiple class="form-control" id="lblList">
+                    <option> TV          </option>
+                    <option> Mobile     </option>
+                    <option> Microphone </option>
+                    <option> Mouse      </option>
+                    <option> Charger    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onclick="getInputValue();"> Add to cart </button>
+                </div>                       
+                </div>
+            </form>
+           
+        </div>
+    </body>
+</html>

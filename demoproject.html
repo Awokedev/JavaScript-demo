@@ -1,0 +1,371 @@
+ <!DOCTYPE html>
+ <html lang="en">
+    <had>
+        <Title>DOM Manipulation and getelementbyId method</Title>
+        <link rel="stylesheet" href="css/stylee.csss">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+        
+        // to show a message that the button is clicked
+        function fn0(){
+            alert("Button clicked");
+        }
+        // To chenge the text when its clicked
+        function fn1()
+        {
+            //using a document object we identify with tag has this heading2 Id by using getelementbyId method
+          document.getElementById("heading2").innerHTML="Awe Learning"; 
+        }
+        // To show the text which we insert in the textbox
+        function fn2()
+        {
+            var str = document.getElementById("text3").value;
+            alert("Value inside a text box is: " +str);
+        }
+        //To check if the password and username have the same values or nor
+        function fn3() 
+        {
+            var txt1 = document.getElementById("text1").value;
+            var txt2 = document.getElementById("text2").value;
+    
+            if (txt1 == txt2) 
+            {
+                alert("Same Text!");
+            } 
+            else 
+                alert("Different Texts.");  
+        }
+        //To check which button is selected 
+       function fn4()
+        {
+            var rd1 = document.getElementById("rd1");
+            var rd2 = document.getElementById("rd2");
+            var rd3 = document.getElementById("rd3");
+            var rd4 = document.getElementById("rd4");
+            if(rd1.checked==true)
+            {
+                alert("The course selected is: "+rd1.value);
+            }
+                
+            else if(rd2.checked==true)
+            {
+                alert("The course selected is: "+rd2.value);
+            }
+                
+            else if(rd3.checked==true)
+            {
+                alert("The course selected is: "+rd3.value);
+            }
+                
+            else if(rd4.checked==true)
+            {
+                alert("The course selected is: "+rd4.value);
+            }        
+            else
+                alert("no course selected")
+        }
+        // To check which option is selected
+        function fn5()
+        {
+            var select = document.getElementById("selectbox")
+            alert(select.options[select.selectedIndex].value)
+        }
+        // Using getelementByTagName method to manipulat html tags as a whole(like "p", "div".....)
+        function changingStyling()
+        {
+            var para = document.getElementsByTagName("p");
+           
+            for(var i=0; i<para.length; i++)
+            {
+                para[i].style.fontStyle = "italic";
+            }
+                
+        };
+
+        function changingStyling1()
+        {
+            var para = document.getElementsByClassName("mypara");
+            for(var i=0; i<para.length; i++)
+            {
+                para[i].style.color="red"
+            }
+        };
+
+        function setNewImage()
+        {
+         document.getElementById("img1").src ="Images/chisabay.jpg"  ;
+        }
+
+        function setOldImage()
+        {
+            document.getElementById("img1").src ="Images/image3.jpg"  ;
+        }
+
+        function validate()
+        {
+            var username = document.getElementById("uname");
+            var password = document.getElementById("pass");
+
+            if(username.value.trim() =="" || password.value.trim() =="")//trim() method will remove any space
+            {
+                alert("No blank vallues allowed");
+                return false;
+            }
+            else
+            {
+                return true;
+
+            }
+        }
+        function validating()
+        {
+            var username = document.getElementById("unme");
+            var password = document.getElementById("pss");
+
+            if(username.value.trim() =="" )//trim() method will remove any space
+            {
+                //alert("Blank UserName");
+                username.style.border = "solid 3px red";// adding CSS to the text box when the return is false
+                document.getElementById("lbluser").style.visibility="visible"; 
+                return false;
+            }
+            else if(password.value.trim() =="")
+            {
+                //alert("Blank Password");
+                password.style.border = "solid 3px red";
+                document.getElementById("lblpass").style.visibility="visible"; 
+                return false;
+
+            }
+            else if(password.value.trim().length<5)
+            {
+                //alert("Password too short");
+                password.style.border = "solid 3px red";
+                document.getElementById("lblpass").style.visibility="visible"; 
+                document.getElementById("lblpass").innerHTML= "Password too short"
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+
+      function valid()
+        {
+            var username = document.getElementById("unm").value;
+            var regx = /[a-x]00/i;//i is for case insensetive
+            //var regx = /[0-9]a[0-6]c[a-u]/i;
+            //var regx = /[^1abc]00/i; ^ is to exclude a caractore
+            if(regx.test(username)) //regx.test() will chck the input text whether it has the pattern or not
+            {
+                return true;
+                document.getElementById("luser").style.visibility="hidden"; 
+            }
+            else{
+                //alert("Invalid username");
+                document.getElementById("luser").style.visibility="visible"; 
+                return false;
+                
+            }
+        }
+        function vali()
+        {
+            var phone = document.getElementById("phone").value;
+            var regxx = /^[1][0-9]{10}$/; //phone number
+            //var regxx = /^[5-9][a-z]{8}[0]$/; //complex expression example
+            if(regxx.test(phone))
+            {
+                document.getElementById("lphone").innerHTML="Valid Phone number";
+                document.getElementById("lphone").style.visibility="visible";
+                document.getElementById("lphone").style.color="green";
+            }
+            else{
+               // document.getElementById("lusr").innerHTML="Valid";
+                document.getElementById("lphone").style.visibility="visible";
+                document.getElementById("lphone").style.color="red";
+
+            }
+        }
+
+        function checkEmail()
+        {
+            var email = document.getElementById("eemail").value;
+            
+            //var regx = /[a-x]00/i;
+            var regxxx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; //email validation expression
+           
+            if(regxxx.test(email))
+            {
+                document.getElementById("lemail").innerHTML="Valid Email address";
+                document.getElementById("lemail").style.visibility="visible";
+                document.getElementById("lemail").style.color="green";
+            }
+            else{
+               // document.getElementById("lusr").innerHTML="Valid";
+                document.getElementById("lemail").style.visibility="visible";
+                document.getElementById("lemail").style.color="red";
+
+            }
+        }
+    
+    
+//buttonclick();
+
+        </script>
+ 
+    </head>
+    <body style="background-color: powderblue;">
+        
+        <div class="row">
+        <div class="col-sm-6">
+        <h1>DOM Manipulations</h1>
+        <h3>getElementById Method </h3>
+        <p> getElementById helps to acces HTML elements one by one, Id has to be unique</p>
+        <p>Steps to use the getelementbyId method</p>
+        <p>-- Give Id to HTML Element</p>
+        <p>-- Use the Id in javascript by creating a function</p>
+        <p>function functionName()
+            {
+                document.getelementbyId("Id").Doing Manipulations
+            }
+        </p>
+
+        <!-- adding onclick event on button and call a function(add a functionality ato a button) -->
+        <button onclick="fn0()">Click Me</button> </br> </br>
+
+        <button onclick="fn1()">Click Awe</button>
+        
+        <h2 style="background-color: rosybrown;" id="heading2">Taking inputs from user</h2><br>
+        <h4>Taking inputs from a text box</h4>
+        <input id="text3" placeholder="Enter Anything">
+        <br>
+        <button onclick="fn2()" id="btn1">click Me</button>
+        <br>
+        <br>
+
+        <p>Check if the username and password have the same value or not</p>
+        <input id="text1" placeholder="username">
+        <br>
+        <br>
+        <input type="password" id="text2" placeholder="Password">
+        <br>
+        <button onclick="fn3()">Submit</button>
+
+        <h4>Taking inputs from Radio Buttons</h4>
+        <!-- if the name for the radio buttons are the same then there will not be multiple selection, 
+        if the name is defferent then multiple selection is possible -->
+        <p>Which Course you want to take for this semester</p>
+        <input id="rd1" name="grp1" type="radio" value="JavaScript">javascript</input></br>
+        <input id="rd2" name="grp1" type="radio" value="CSS">CSS</input></br>
+        <input id="rd3" name="grp1" type="radio" value="HTML">HTML</input></br>
+        <input id="rd4" name="grp1" type="radio" value="JQuery">JQuery</input></br>
+        <button onclick="fn4()" id="btn3">Select</button></br>
+        <h4>Taking inputs from Selectbox</h4>
+        
+        <p>Which Course you want to take for this semester</p>
+        <select id="selectbox">
+            <option value="Javascript">JavaScript</option>
+            <option value="CSS">CSS</option>
+            <option value="HTML">HTML</option>
+            <option value="JQuery">JQuery</option>
+        </select><br>
+        <button onclick="fn5()">Select</button>
+
+        <h3>getElementsbyTagName Method</h3>
+        <p>getElementsbyName method return a collection of all elements in a document with a speciefied Tag name 
+            as HTML collection object, they can be accessed by index number</p>
+            <p>getelementByTagName method help us to access all the tags of particular type on the html page
+                 whether it has an id/class or not </p>
+        <p id="p1" class="mypara">This is paragraph 1</p>
+        <p id="p2">This is paragraph 2</p>
+        <p id="p3" class="mypara">This is paragraph 3</p>
+        <p class="mypara">This is paragraph 4</p> 
+        <a class="mypara" href="#">This is Anchor Tag</a> 
+        <br>
+        <p>By clicking the below button you can change the font of "p" tags of the page to italic </p>
+        <button onclick="changingStyling()">Click Me</button>  
+        <h3>getElementByClassName Method</h3> 
+        <p>we can have the same class name for different tags and the method can return a collection which have the same class name</p>
+        <p>The methos is best To target selectively of different html element using a class name</p>  
+        <p>By clicking the below button you can change the color of the above paragraph with class="mypara" paragraphs only</p>
+        <button onclick="changingStyling1()">Click Me</button>    
+        <br>
+        <br>
+            </div>
+            <div class="col-sm-6">
+                <p>Mouseover and Mouseout events</p>
+                <img id="img1" onmouseover="setNewImage()" onmouseout="setOldImage()" src="Images/image3.jpg" width="500" height="400"><br><br>
+                <!-- form tag is used to submit a data to a server or some other page,
+                action attribute uses to redirect to the page which is needed to precced,
+                we validate the input and depending on the return type we redirect it or not -->
+                <form onsubmit="return validate()" action="message.html">
+                    <h4>Form Validation using JavaScript</h4>
+                    <p>Using javascript we can have custom validation on client side</p>
+                    <input id="uname" type="text" placeholder="username"><br><br>
+                    <input id="pass" type="password" placeholder="password"> <br><br>
+                    <button type="submit">Submit</button>
+                </form>
+                <br><br>
+                <form  action="message.html">
+                    <h4>Form Validation using HTML5</h4>
+                    <p>In HTML5 we can have inbiult validation with attribute "required"</p>
+                    <input id="unam" type="text" placeholder="username" required><br><br> <!-- HTML5 has inbuilt validation with attribute required -->
+                    <input id="pas" type="password" placeholder="password" required> <br><br>
+                    <button type="submit">Submit</button>
+                </form>
+                <br><br>
+                <form onsubmit="return validating()" action="message.html">
+                    <h4>Form Validation using JavaScript</h4>
+                    <p>Using javascript we can have custom validation on client side</p>
+                    <p>Adding length validation for password and addind CSS to the textbox</p>
+                    <input id="unme" type="text" placeholder="username">
+                    <label id ="lbluser" style="color: red; visibility: hidden;">Blank username is Invalid</label><br><br>
+                    <input id="pss" type="password" placeholder="password"> 
+                    <label id ="lblpass" style="color: red; visibility: hidden;">Blank Password is Invalid</label><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+                <br>
+                <form action="message.html">
+                    <h4>Regular Expressions in JavaScript</h4>
+                    <p>A regular expression is an object that describes a pattern of characters.</p>
+                    <p>Regular expressions can be used to perform all types of text pattern-matching, search and text replace operations.</p>
+                    <p>Regular expression has two methods Search() and replace()
+                    </p>
+                    <p>Character sets and ranges</p>
+                    <p>Eg- looking for [a-x]OO pattern in the text [to put a range of characters]</p>
+                         <p>[^acv453] ^ is to exclude the character from the input</p>
+                         <p>Eg -complex character * var regx = /[0-9]a[0-6]c[a-u]/i</p>
+                    <input id="unm" type="text" placeholder="username"><br>
+                    <label id ="luser" style="color: red; visibility: hidden;">Invalid UserName</label><br>
+                    <button onclick= "return valid()" type="submit">Submit</button>
+                </form>
+                <br><br>
+                <form  action="message.html">
+                    <h4>Phone number validation</h4>
+                    <p>^ sign outside // mean to set the begining and putting $ at the end means to set the ending point</p>
+                    <p>We have to put our expression between ^_____$</p>
+                    <input id="phone" type="text" placeholder="Cellphone" ><br>
+                    <label id ="lphone" style="color: red; visibility: hidden;">Invalid Phone number</label><br>
+                    <button onclick="vali()" type="button">Submit</button>
+                </form>
+                <br><br>
+                <form  action="message.html">
+                    <h4>Email Validation</h4>
+                    <p>\d -- matchs any digit(equal to [0-9])</p>
+                    <p>\w -- matchs any word character(a-z, A-Z, 0-9. &, _)</p>
+                    <p>\s -- match whitespace character(spaces, tabs) </p>
+                    <p>\t -- match a tab only</p>
+                    <input id="eemail" type="text" placeholder="Email"><br>
+                    <label id ="lemail" style="color: red; visibility: hidden;">Invalid Email Address</label><br>
+                    <button onclick="checkEmail()" type="button">Submit</button>
+                </form>
+                <br><br>
+            </div>
+        </div>  
+    </body>
+</html>

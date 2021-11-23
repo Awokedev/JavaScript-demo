@@ -1,0 +1,19 @@
+<input type='button' value='Get Site Title' onclick="getSiteTitle();"/>
+<br />
+
+<script language="javascript" type="text/javascript">
+var site;
+function getSiteTitle() {
+    // the following is an entry point
+var clientContext = new SP.ClientContext.get_current();//retrive the client context(SP.ClientContext.get_current() will give he current context)
+site=clientContext.get_web();// retrieve the particular web()
+clientContext.load(site);// after retrieving the web we have to load the web
+clientContext.executeQueryAsync(success, failure);//once its loaded we have to call execute method to retieve from the databese
+}
+function success() {
+alert(site.get_title());
+}
+function failure() {
+alert("Failure!");
+}
+</script>

@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>jquery</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <h2 id="myheading">Jquery Selectors</h2>
+        <h2 class="heading1">Setting Up jquery</h2>
+        <p class="w3-panel w3-red" id="heading1">Setting Up jquery</p>     
+        <div id="firstdiv" class="mydiv">
+            <p>This is the first paragraph</p>
+        </div>
+        <div id="seconddiv" class="mydiv">
+            <p>This is the second paragraph</p>
+        </div>
+        <div id="thirddiv" class="mydiv">
+            <ul>
+                <li>List item 1</li>
+                <li>List item 2</li>
+                <li>List item 3</li>
+                <li>List item 4</li>
+            </ul>   
+        </div>
+        <button id="btn1">Click Me 1</button>
+        <button onclick="fn1()" id="btn2">Click Me 2</button> 
+        <button id="btn3">Toggle</button><br><br>
+        <p>Callback and chaining</p>
+        <button id="btn5">Toggle</button>
+        <h3>Events in Jquery</h3>
+        <p>In Jquery we don't handle the onclick event in html, we handle the event separately in js code</p>
+        <p>its better to write a jquery functions when the entire document is ready</p>
+        <p>$(document).ready(function()
+            {We have to writ the function here}); Loading the function after the entire document(website) is ready.</p>
+            <p>Animation</p>
+            <button id="btn4">Animate</button><br><br>
+        <div id="cube" class="mycube">
+           <p>CUBE</p>
+        </div>
+    </body>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous" type="text/javascript">
+    </script>  
+    <!-- <script src="js/jquery.js" type="test/javascript"></script>   -->
+    <script>
+       // function fn1()
+        //{
+            //document.getElementById("heading1").innerHTML="AWE";
+            //$("#myheading").fadeToggle(1000);
+            //$("#heading1").fadeToggle(2000);
+           // $("div").fadeToggle(2000); to select the hole div
+            //$("#firstdiv, #seconddiv, p, li" ).fadeToggle(2000);// to select diferent elements, id, class at a time
+            //$("div p").fadeToggle(1000);// to select p inside a div
+            //$("p:first").fadeToggle(1000); // to select the first p only
+            //$(".mydiv:first").fadeToggle(1000); // to select the first div of #mydiv 
+           // $(".mydiv:even").fadeToggle(1000);  // to select #mydiv of even
+           //$("li:even").fadeToggle(1000); 
+       //}
+       $(document).ready(function()// its always best practice to write this code before any jquery events
+       {
+        //$("#btn2").click(fn2);//we can select for specific button using id
+        //$("#btn2").click(fn2); //this work for all buttons
+           // function fn2(){
+           //$("#myheading").fadeToggle(1000);// with in the function we can select the class or id or elemnt to do manipulations
+          // }
+            //$("#btn1").dblclick(fn3); //this work for all buttons
+            // function fn3(){
+           // $("#heading1").fadeToggle(1000);// with in the function we can select the class or id or elemnt to do manipulations
+            //}
+           // $("#btn1").hover(fn4, fn5);// fadein and fadeout on hover
+            //function fn4(){
+            //$("#firstdiv").fadeOut(1000);
+            //}
+            //function fn5(){
+           // $("#firstdiv").fadeIn(1000);}
+           $("#btn1").click(function(){
+               $("#firstdiv").slideUp();
+           });
+           $("#btn2").click(function(){
+               $("#firstdiv").slideDown();
+           });
+           $("#btn3").click(function(){
+               $("#firstdiv").slideToggle();
+           });
+           $("#btn4").click(function(){
+               $("#cube").animate({
+                   left: '150px',
+                   opacity: '1',
+                   width: '120px',
+                   height: '120px'
+               },"slow")
+           })
+           function printmsg(){//callback function(will wait the first effect till end and this function will excute)
+               alert("Effect done");
+           }
+           $("#btn5").click(function(){
+               $("#thirddiv").slideUp(2000).slideDown(2000).fadeOut(2000).fadeIn(2000, printmsg); //chaning and callback
+           })   
+        });
+    </script>
+</html>

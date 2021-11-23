@@ -1,0 +1,19 @@
+ h1 {
+                color :darkblue;
+                font-family: 'Courier New', Courier, monospace;
+                font-size :220%;
+                
+            }
+            button {
+                color: tomato;
+                background-color: rgb(153, 0, 255);
+                
+            }
+            h2 { color: darkblue;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 150%;
+
+            }
+            p {
+                color :mediumblue;
+            }

@@ -1,0 +1,544 @@
+
+Example-1: Get Logged In User Details using Rest API
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" ></script>
+
+<input type="button" id="btnClick" value="Get User Details using Rest API"/>
+
+<script>
+$(function(){
+$("#btnClick").click(function(){
+GetUserDetails();
+});
+});
+
+function GetUserDetails() {
+var url = "https://sharepointskytraining.sharepoint.com/sites/TSInfo/_api/web/currentuser";
+$.ajax({
+url: url,
+headers: {
+Accept: "application/json;odata=verbose"
+},
+async: false,
+success: function (data) {
+alert("User Name: "+data.d.Title +" Email ID: " +data.d.Email+" User ID: " +data.d.Id);
+},
+eror: function (data) {
+alert("An error occurred. Please try again.");
+}
+});
+}
+</script>
+
+
+
+Example-2: Create SharePoint List using Rest API in SharePoint Online
+
+<h2>Create SharePoint List using Rest API in SharePoint Online or SharePoint 2016/2013</h2>
+<br/>
+<table>
+<tr>
+<td>Enter List Title:</td>
+<td><input type="text" id="txtTitle" size="40"/></td>
+</tr>
+<tr>
+<td>Enter List Description:</td>
+<td><textarea rows="4" cols="50" id="txtDescription"></textarea></td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<input type="button" id="btnClick" value="Create List using Rest API"/>
+</td>
+</tr>
+</table>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<script>
+$(function(){
+$("#btnClick").click(function(){
+
+var title = $("#txtTitle").val();
+
+var description = $("#txtDescription").val();
+
+var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists";
+
+$.ajax({
+url: requestUri,
+type: "POST",
+data:JSON.stringify({'__metadata': { 'type': 'SP.List' }, 'AllowContentTypes': true,'BaseTemplate': 100, 'ContentTypesEnabled': true, 'Description': description, 'Title': title }),
+headers: {
+"accept":"application/json;odata=verbose",
+"content-type": "application/json;odata=verbose",
+"X-RequestDigest":$("#__REQUESTDIGEST").val()
+},
+success: onSuccess,
+error: onError
+});
+function onSuccess(data) {
+alert('List Created Successfully !');
+}
+function onError(error) {
+alert(JSON.stringify(error));
+}
+});
+});
+</script>
+
+Example-3: Update SharePoint List using Rest API in SharePoint Online
+
+<h2>Update SharePoint List using Rest API in SharePoint Online or SharePoint 2016/2013</h2>
+<br/>
+<table>
+<tr>
+<td>Enter Old List Title:</td>
+<td><input type="text" id="txtOldTitle" size="40"/></td>
+</tr>
+<tr>
+<tr>
+<td>Enter New List Title:</td>
+<td><input type="text" id="txtNewTitle" size="40"/></td>
+</tr>
+<tr>
+<td>Enter New List Description:</td>
+<td><textarea rows="4" cols="50" id="txtNewDescription"></textarea></td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<input type="button" id="btnClick" value="Update List using Rest API"/>
+</td>
+</tr>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<script>
+$(function(){
+$("#btnClick").click(function(){
+
+var oldtitle = $("#txtOldTitle").val();
+var newtitle = $("#txtNewTitle").val();
+var newdescription = $("#txtNewDescription").val();
+
+var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle(" + "'" + oldtitle + "'"+")";
+
+$.ajax({
+url: requestUri,
+type: "POST",
+data:JSON.stringify({'__metadata': { 'type': 'SP.List' }, 'Description': newdescription, 'Title': newtitle }),
+headers: {
+"X-HTTP-Method":"MERGE",
+"accept":"application/json;odata=verbose",
+"content-type": "application/json;odata=verbose",
+"X-RequestDigest":$("#__REQUESTDIGEST").val(),
+"IF-MATCH": "*"
+},
+success: onSuccess,
+error: onError
+});
+function onSuccess(data) {
+alert('List Title and Description Updated Successfully !');
+}
+function onError(error) {
+alert(JSON.stringify(error));
+}
+});
+});
+</script>
+
+Example-3: Delete SharePoint List using Rest API in SharePoint Online
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<h2>Delete SharePoint List using Rest API in SharePoint Online or SharePoint 2016/2013</h2>
+<br/>
+<table>
+<tr>
+<td>Enter List Title:</td>
+<td><input type="text" id="txtTitle" size="40"/></td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<input type="button" id="btnClick" value="Delete List using Rest API"/>
+</td>
+</tr>
+</table>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(function(){
+$("#btnClick").click(function(){
+var title = $("#txtTitle").val();
+var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle(" + "'" + title + "'"+")";
+
+$.ajax({
+url: requestUri,
+type: "DELETE",
+headers: {
+"accept":"application/json",
+"X-RequestDigest":$("#__REQUESTDIGEST").val(),
+"IF-MATCH":"*"
+},
+success: onSuccess,
+error: onError
+});
+function onSuccess(data) {
+alert('List Deleted');
+}
+function onError
+(error) {
+alert(error);
+}
+});
+});
+</script>
+
+Example-7: Retrieve List Items using Rest API
+
+<p style="font-size:25px;" width="500px;">Training Announcments (Rest API):</p>
+
+<hr>
+<p id="announcments" style="font-size:15px;" width="500px;"></p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+
+var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('Training Announcements')/items";
+
+$.ajax({
+url: requestUri,
+type: "GET",
+headers: {
+"accept":"application/json; odata=verbose"
+},
+success: onSuccess,
+error: onError
+});
+function onSuccess(data) {
+
+var allitems='';
+
+var items = data.d.results;
+
+for (var i = 0; i < items.length; i++) {
+
+var url=_spPageContextInfo.webAbsoluteUrl +"/Lists/Training Announcements/DispForm.aspx?ID="+items[i].ID;
+
+allitems+= "<a href='" + url + "'>" + items[i].Title + "</a>" + "<br>";
+}
+document.getElementById("announcments").innerHTML = allitems;
+}
+function onError(error) {
+alert(JSON.stringify(error));
+}
+</script>
+
+Example-4: Display SharePoint list data in grid or HTML table using Rest API 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(function(){
+$("#btnGetTrainingRequests").click(function(){
+var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('TrainingRequests')/items";
+$.ajax({
+url: requestUri,
+type: "GET",
+headers: {
+"accept":"application/json; odata=verbose"
+},
+success: onSuccess,
+error: onError
+});
+function onSuccess(data) {
+var items = data.d.results;
+var fullResults = '<table id="tabTrainings" style="width:100%" border="1 px"><thead><tr><td><b>Title</b></td>' + '<td><b>Course</b></td>'+ '<td><b>TrainingType</b></td>' +'<td><b>Comments</b></td>' + '</tr></thead><tbody>';
+for (var i = 0; i < items.length; i++) {
+fullResults += '<tr>';
+fullResults += '<td>' + items[i].Title + '</td>';
+fullResults += '<td>' + items[i].Course + '</td>';
+fullResults += '<td>' + items[i].TrainingType + '</td>';
+fullResults += '<td>' + items[i].Comments + '</td>';
+fullResults += '</tr>';
+}
+$('#resultsTable').append(fullResults);
+}
+function onError(error) {
+alert('Error');
+}
+});
+});
+</script>
+<input type="button" id="btnGetTrainingRequests" value="Get All Training Requests"/>
+<br/><br/>
+<table id='tabTrainings' style="width: 100%;" border="1 px">
+<tr>
+<td>
+<div id="resultsTable" style="width: 100%"></div>
+</td>
+</tr>
+</table>
+
+Example-5: Display SharePoint list data in grid or HTML table using Rest API (With People Picker Control)
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(function(){
+$("#btnGetTrainingRequests").click(function(){
+var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('TrainingRequests')/items?$select=Title,Course,TrainingType,Comments,TrainerName/EMail,TrainerName/FirstName,TrainerName/LastName&$expand=TrainerName";
+$.ajax({
+url: requestUri,
+type: "GET",
+headers: {
+"accept":"application/json; odata=verbose"
+},
+success: onSuccess,
+error: onError
+});
+function onSuccess(data) {
+var items = data.d.results;
+var fullResults = '<table id="tableCars" style="width:100%" border="1 px"><thead><tr><td><b>Title</b></td>' + '<td><b>Course</b></td>' + '<td><b>TrainerName</b></td>' + '<td><b>TrainingType</b></td>' +'<td><b>Comments</b></td>' + '</tr></thead><tbody>';
+for (var i = 0; i < items.length; i++) {
+fullResults += '<tr>';
+fullResults += '<td>' + items[i].Title + '</td>';
+fullResults += '<td>' + items[i].Course + '</td>';
+fullResults += '<td>' + items[i].TrainerName.FirstName + '</td>';
+fullResults += '<td>' + items[i].TrainingType + '</td>';
+fullResults += '<td>' + items[i].Comments + '</td>';
+fullResults += '</tr>';
+}
+$('#resultsTable').append(fullResults);
+}
+function onError(error) {
+alert('Error');
+}
+});
+});
+</script>
+<input type="button" id="btnGetTrainingRequests" value="Get All Training Requests"/>
+<br/><br/>
+<table id='tableCars' style="width: 100%;" border="1 px">
+<tr>
+<td>
+<div id="resultsTable" style="width: 100%"></div>
+</td>
+</tr>
+</table>
+
+Example-6: Display SharePoint list data in jQuery data table using Rest API & jQuery
+
+<html>
+<head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<!--External js file to get data from SharePoint List -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.jqueryui.min.css">
+</head>
+<body>
+<div>
+<table id="Trainings" class="display" cellspacing="0" width="100%">
+<thead>
+<tr>
+<th>Title</th>
+<th>Course</th>
+<th>TrainingType</th>
+<th>Comments</th>
+</tr>
+</thead>
+</table>
+</div>
+</body>
+</html>
+
+<script>
+$(document).ready(function() {
+GetItems();
+});
+function GetItems() {
+var siteUrl = _spPageContextInfo.webAbsoluteUrl;
+var oDataUrl = siteUrl + "/_api/web/lists/getbytitle('TrainingRequests')/items?$select=Title,Course,TrainingType,Comments";
+$.ajax({
+url: oDataUrl,
+type: "GET",
+dataType: "json",
+headers: {
+"accept": "application/json;odata=verbose"
+},
+success: OnSuccess,
+error: OnFailure
+});
+}
+function OnSuccess(data) {
+try {
+$('#Trainings').DataTable({
+"aaData": data.d.results,
+"aoColumns": [
+{
+"mData": "Title"
+},
+{
+"mData": "Course"
+},
+{
+"mData": "TrainingType"
+},
+{
+"mData": "Comments"
+}
+]
+});
+} catch (e) {
+alert(e.message);
+}
+}
+function OnFailure(data, errMessage) {
+alert("Error: " + errMessage);
+}
+
+</script>
+
+
+
+Example-8: Bind SharePoint list items to dropdownlist using Rest API
+
+<select id="idDepartment" name="idDepartment"></select>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('Departments')/items";
+$.ajax({
+url: requestUri,
+type: "GET",
+headers: {
+"accept":"application/json; odata=verbose"
+},
+success: onSuccess,
+error: onError
+});
+function onSuccess(data) {
+var allitems='';
+var items = data.d.results;
+for (var i = 0; i < items.length; i++) {
+var optionhtml = '<option value="' + i + '">' + data.d.results[i].Title + '</option>';
+$("#idDepartment").append(optionhtml);
+}
+}
+function onError(error) {
+alert(JSON.stringify(error));
+}
+</script>
+
+<style>
+
+#idDepartment {
+padding: 5px;
+color: lightcoral;
+font-size: 12px;
+width: 150px;
+}
+</style>
+
+
+Example-9: Rest API filter list items created by logged in user SharePoint Online
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" ></script>
+<h1>Training Announcements</h1><br/>
+<div id="result"></div>
+<script>
+var LoginName=_spPageContextInfo.userEmail;
+var newURL="/_api/Web/Lists/GetByTitle('TrainingAnnouncements')/Items?$select=Title,ID,Author/EMail&$filter=Author/EMail eq '"+ LoginName +"'&$expand=Author/Id";
+jQuery().ready(function () {
+function getItems(url) {
+return $.ajax({
+url: _spPageContextInfo.webAbsoluteUrl + url,
+type: "GET",
+headers: {
+"accept": "application/json;odata=verbose",
+}
+});
+}
+getItems( newURL).done(function(data){
+var fullresult="";
+data.d.results.forEach(function(item){ // no need for oldskool for loops
+fullresult+=item.Title +'<br><br>';
+});
+jQuery('#result').html(fullresult);
+});
+});
+</script>
+
+Example-10: Make synchronous Rest API call using .done Function
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" ></script>
+
+<h1>Training Announcements</h1><br/>
+
+<div id="result"></div>
+
+<script>
+jQuery().ready(function () {
+function getItems(url) {
+return $.ajax({
+url: _spPageContextInfo.webAbsoluteUrl + url,
+type: "GET",
+headers: {
+"accept": "application/json;odata=verbose",
+}
+});
+}
+getItems( "/_api/Web/Lists/GetByTitle('TrainingAnnouncements')/Items" ).done(function(data){
+var fullresult="";
+data.d.results.forEach(function(item){ 
+fullresult+=item.Title +'<br><br>';
+});
+jQuery('#result').html(fullresult);
+});
+});
+</script>
+
+Make synchronous Rest API call using .then function:
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" ></script>
+<h1>Training Announcements</h1><br/>
+<div id="result"></div>
+<script>
+jQuery().ready(function () {
+var fullUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('TrainingAnnouncements')/items?$select=ID,Title";
+getItems(fullUrl).then(getItemsSuccess, getItemsFail);
+})
+function getItems(url){
+return $.ajax({
+url: url,
+type: "GET",
+headers: {
+"accept": "application/json;odata=verbose",
+}
+});
+}
+function getItemsSuccess(data){
+var fullresult="";
+if(data.d.results.length > 0){
+var results = data.d.results;
+for (var i = 0; i < results.length; i++) {
+fullresult+=results[i].Title +'<br><br>';
+}
+jQuery('#result').html(fullresult);
+}
+else
+{
+jQuery('#result').text("No Data");
+}
+}
+function getItemsFail(err){
+alert("Some error occurred !!!");
+}
+</script>
+<h3>hi</h3>

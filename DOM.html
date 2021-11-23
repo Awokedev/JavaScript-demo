@@ -1,0 +1,127 @@
+ <!DOCTYPE html>
+ <html>
+    <had>
+        <Title>DOM Manipulation and getelementbyId method</Title>
+        <script type="text/javascript">
+        function buttonclick(){
+            alert("Button clicked");
+        }
+        function changetext()
+        {
+            //using a document object we identify with tag has this heading2 Id by using getelement byId method
+          document.getElementById("heading2").innerHTML="Awe Learning"; 
+        }
+
+        function fn1()
+        {
+            var str = document.getElementById("text3").value;
+            alert("Value inside a text box is: " +str);
+        }
+
+        function compareText() 
+        {
+    var txt1 = document.getElementById("text1").value;
+    var txt2 = document.getElementById("text2").value;
+    
+    if (txt1 == txt2) {
+        alert("Same Text!");
+    } else {
+        alert("Different Texts.");
+       
+    }
+
+       }
+       function fn2()
+        {
+            var rd1 = document.getElementById("rd1");
+            var rd2 = document.getElementById("rd2");
+            var rd3 = document.getElementById("rd3");
+            var rd4 = document.getElementById("rd4");
+            if(rd1.checked==true)
+            {
+                alert("The course selected is: "+rd1.value);
+            }
+                
+            else if(rd2.checked==true)
+            {
+                alert("The course selected is: "+rd2.value);
+            }
+                
+            else if(rd3.checked==true)
+            {
+                alert("The course selected is: "+rd3.value);
+            }
+                
+            else if(rd4.checked==true)
+            {
+                alert("The course selected is: "+rd4.value);
+            }        
+            else
+                alert("no course selected")
+            
+           
+        }
+
+        function fn3()
+        {
+            var select = document.
+        }
+//buttonclick();
+
+        </script>
+        <style>
+            h2 {
+                color :skyblue;
+                font-family: 'Courier New', Courier, monospace;
+                font-size :220%;
+                
+            }
+            button {
+                color: tomato;
+                background-color: rgb(153, 0, 255);
+                
+            }
+        </style>
+    </head>
+    <body style="background-color: powderblue;">
+
+        <!-- adding onclick event on button and call a function(add a functionality ato a button) -->
+        <button onclick="buttonclick()">Click Me</button> </br> </br>
+        <button onclick="changetext()">Click Awe</button>
+        
+        <h2 style="background-color: rosybrown;" id="heading2">Taking inputs from a texbox radio and others</h2>
+        <input id="text3" placeholder="Enter Anything">
+        <br>
+        <button onclick="fn1()" id="btn1">click Me</button>
+        <br>
+        <br>
+        <p>Check if the username and password have the same value or not</p>
+        <input id="text1" placeholder="username">
+        <br>
+        <br>
+        <input type="password" id="text2" placeholder="Password">
+        <br>
+
+        <button onclick="compareText()">Submit</button>
+        <p>Radio Buttons selection</s></p>
+        <!-- if the name for the radio buttons are the same then there will not be multiple selection, 
+        if the name is defferent then multiple selection is possible -->
+        <p>Which Course you want to take for this semester</p>
+        <input id="rd1" name="grp1" type="radio" value="JavaScript">javascript</input></br>
+        <input id="rd2" name="grp1" type="radio" value="CSS">CSS</input></br>
+        <input id="rd3" name="grp1" type="radio" value="HTML">HTML</input></br>
+        <input id="rd4" name="grp1" type="radio" value="JQuery">JQuery</input></br>
+        <button onclick="fn2()" id="btn3">Select</button></br>
+        <p>Selectbox Dropdown</p>
+        <select id="selectbox">
+            <option value="Javascript">JavaScript</option>
+            <option value="CSS">CSS</option>
+            <option value="HTML">HTML</option>
+            <option value="JQuery">JQuery</option>
+        </select><br>
+        <button onclick="fn3()">Select</button>
+
+                    
+    </body>
+
+</html>
