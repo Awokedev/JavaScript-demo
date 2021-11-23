@@ -1,0 +1,29 @@
+<html>
+    <had>
+        <Title>DOM Manipulation and getelementbyId method</Title>
+        <script type="text/javascript">
+        function buttonclick(){
+            alert("Button clicked");
+
+        }
+        function changetext()
+        {
+            //using a document object we identify with tag has this heading2 Id by using getelement byId method
+          document.getElementById("heading2").innerHTML="Awe Learning";  
+        }
+//buttonclick();
+
+        </script>
+    </head>
+    <body>
+        <!-- adding onclick event on button and call a function(add a functionality ato a button) -->
+        <button onclick="buttonclick()">Click Me</button> </br> </br>
+        <button onclick="changetext()">Click Awe</button>
+        
+        <h2 id="heading2">Some Rondom Text</h2>
+        <input id="text1" placeholder="Enter Anything">
+        <br>
+        <button on id="btn1">Click me</button>
+    </body>
+    
+</html>

@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Object</title>
+        <script type="text/javascript">
+        var person = {FName : "Awe", LName : "Ejigu", Age : 33, Gender : "Male",
+        FullName : function(){return this.FName +" "+ this.LName;}};
+        
+        document.write("My Name is" +" "+person.FullName())
+
+        // var cars = {car_brand : "Tesla", car_model : "Model 3", price : 34900,
+        //  teslaautoPilot : function()
+        //  { return("This car has auto pilot");}
+        // }
+
+        //  document.write("<h4>" +cars.teslaautoPilot()+"</h4>");
+
+
+         // function constractor is like a template which help to create more objects
+
+         function Cars(car_brand, car_model,price)//passing argument or place holder 
+         {
+             this.car_brand = car_brand;
+             this.car_model = car_model;
+             this.price = price;
+             this.teslaAutoPilot = function()
+             {
+                 document.write("<h2>This car has auto Pilot system");
+             }
+         }
+
+         //Using the above constructor function we can create multiple objects
+         var c1 = new Cars("Tesla", "Model 3", 35000);
+         var c2 = new Cars("Tesla", "Model p", 45000);
+         c1.teslaAutoPilot();
+         ducument.write("<h3>"+c1.car_brand+"</h3>")
+         /*
+         Boolean can be objects(if defined with a new keyword)
+         Number Can be objects (if defined wit a ew keyword)
+         string can be objects()
+
+         */
+
+
+
+
+
+
+
+
+         
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
